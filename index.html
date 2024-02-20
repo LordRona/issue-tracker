@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Simple Issue Tracker</h1>
+    <div id="searchBox">
+      <input type="text" id="searchInput" placeholder="Search by title">
+      <button id="searchButton">Search</button>
+    </div>
     <form action="POST" id="issueForm">
         <label for="title">Title:</label>
         <input type="text" id="title" required><br>
@@ -34,113 +38,7 @@
         <tbody id="issueList"></tbody>
     </table>
 
-    <script>
-        //JavaScript code goes here
-
-        const issueForm = document.getElementById('issueForm');
-
-        const issueList = document.getElementById('issueList');
-
-        let issues = [];
-
-        issueForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const title = document.getElementById('title').value;
-
-            const description = document.getElementById('description').value;
-
-            const priority = document.getElementById('priority').value;
-
-            const issue = {
-                title,
-                description,
-                priority,
-            };
-
-            issues.push(issue);
-
-            localStorage.setItem('issues', JSON.stringify(issues));
-
-            displayIssues();
-
-            document.getElementById('issueForm').reset();
-        });
-
-        function displayIssues() {
-            issueList.innerHTML = '';
-
-            for (let i = 0; i < issues.length; i++) {
-                const issue = issues[i];
-
-                const row = document.createElement('tr');
-
-                const titleCell = document.createElement('td');
-
-                titleCell.textContent = issue.title;
-
-                const descriptionCell = document.createElement('td');
-
-                descriptionCell.textContent = issue.description;
-
-                const priorityCell = document.createElement('td');
-
-                priorityCell.textContent = issue.priority;
-
-                const actionsCell = document.createElement('td');
-
-                const resolveButton = document.createElement('button');
-
-                resolveButton.textContent = 'Resolve';
-
-                resolveButton.addEventListener('click', () => {
-                    resolveIssue(i);
-                });
-
-                const deleteButton = document.createElement('button');
-
-                deleteButton.textContent = 'Delete';
-
-                deleteButton.addEventListener('click', () => {
-                    deleteIssue(i);
-                });
-
-                actionsCell.appendChild(resolveButton);
-
-                actionsCell.appendChild(deleteButton);
-
-                row.appendChild(titleCell);
-
-                row.appendChild(descriptionCell);
-
-                row.appendChild(priorityCell);
-                row.appendChild(actionsCell);
-
-                issueList.appendChild(row);
-            }
-        }
-
-        function resolveIssue(index) {
-            issues[index].resolved = true;
-
-            localStorage.setItem('issues', JSON.stringify(issues));
-
-            displayIssues();
-
-            alert('Issue resolved.');
-
-            window.location.reload();
-        };
-
-        function deleteIssue(index) {
-            issues.splice(index, 1);
-
-            localStorage.setItem('issues', JSON.stringify(issues));
-
-            displayIssues();
-
-            alert('Issue deleted.');
-        }
+    <script src="./index.js">
 
     </script>
 </body>

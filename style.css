@@ -83,3 +83,16 @@ body {
     background-color: #0366d6;
     color: #fff;
   }
+
+  #searchBox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #searchInput {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
